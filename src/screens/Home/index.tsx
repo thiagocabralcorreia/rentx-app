@@ -3,23 +3,25 @@ import { StatusBar } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 
 import Logo from "../../assets/logo.svg";
+import { Card } from "../../components/Card";
 
-import { Container, Header, TotalCars } from "./styles";
+import * as S from "./styles";
 
 interface HomeProps {}
 
 export const Home = (props: HomeProps) => {
   return (
-    <Container>
+    <S.Container>
       <StatusBar
         barStyle="light-content"
         backgroundColor="transparent"
         translucent
       />
-      <Header>
+      <S.Header>
         <Logo width={RFValue(114)} height={RFValue(11)} />
-        <TotalCars>Total de 12 carros</TotalCars>
-      </Header>
-    </Container>
+        <S.TotalCars>Total de 12 carros</S.TotalCars>
+      </S.Header>
+      <Card />
+    </S.Container>
   );
 };
