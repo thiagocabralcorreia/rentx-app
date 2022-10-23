@@ -13,7 +13,7 @@ import {
 import * as SplashScreen from "expo-splash-screen";
 import theme from "./src/styles/theme";
 
-import { Home } from "./src/screens/Home";
+import { CarDetails } from "./src/screens/CarDetails";
 import { ThemeProvider } from "styled-components";
 
 export default function App() {
@@ -32,7 +32,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Home />
+      <CarDetails />
     </ThemeProvider>
   );
 }
