@@ -1,30 +1,37 @@
 import React from "react";
+import { RectButtonProps } from "react-native-gesture-handler";
 
 import * as S from "./styles";
 
-export function Card() {
+export interface IModelCar {
+  brand: string;
+  name: string;
+  period: string;
+  price: number;
+  thumbnail: string;
+}
+export interface CarProps extends RectButtonProps {
+  data: IModelCar;
+}
+
+export function Card({ data, ...rest }: CarProps) {
   return (
-    <S.Container>
+    <S.Container {...rest}>
       <S.Details>
-        <S.Brand>AUDI</S.Brand>
-        <S.Name>RS 5 Coupê</S.Name>
+        <S.Brand>{data.brand}</S.Brand>
+        <S.Name>{data.name}</S.Name>
 
         <S.About>
           <S.Rent>
-            <S.Period>Ao dia</S.Period>
-            <S.Price>R$ 120</S.Price>
+            <S.Period>{data.period}</S.Period>
+            <S.Price>R$ {data.price}</S.Price>
           </S.Rent>
 
-          <S.Type>{/* <MotorIcon /> */}</S.Type>
+          <S.Type></S.Type>
         </S.About>
       </S.Details>
 
-      <S.CarImage
-        source={{
-          uri: "https://freepngimg.com/thumb/audi/35227-5-audi-rs5-red.png",
-        }}
-        resizeMode="contain"
-      />
+      <S.CarImage source={{ uri: data.thumbnail }} resizeMode="contain" />
     </S.Container>
   );
 }
