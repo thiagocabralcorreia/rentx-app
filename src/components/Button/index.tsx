@@ -4,7 +4,7 @@ import * as S from "./styles";
 import { ActivityIndicator } from "react-native";
 import { RectButtonProps } from "react-native-gesture-handler";
 
-interface Props extends RectButtonProps {
+interface ButtonProps extends RectButtonProps {
   title: string;
   color?: string;
   loading?: boolean;
@@ -18,7 +18,7 @@ export function Button({
   enabled = true,
   loading = false,
   light = false,
-}: Props) {
+}: ButtonProps) {
   const theme = useTheme();
 
   return (

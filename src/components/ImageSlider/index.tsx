@@ -2,11 +2,11 @@ import React from "react";
 import { Bullet } from "../Bullet";
 import * as S from "./styles";
 
-interface Props {
+interface ImageSliderProps {
   imagesUrl: string;
 }
 
-export function ImageSlider({ imagesUrl }: Props) {
+export function ImageSlider({ imagesUrl }: ImageSliderProps) {
   return (
     <S.Container>
       <S.ImageIndexes>

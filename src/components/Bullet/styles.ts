@@ -1,10 +1,10 @@
 import styled from "styled-components/native";
 
-interface Props {
+interface ContainerProps {
   active: boolean;
 }
 
-export const Container = styled.View<Props>`
+export const Container = styled.View<ContainerProps>`
   width: 6px;
   height: 6px;
   margin-left: 8px;
