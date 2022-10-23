@@ -1,6 +1,7 @@
 import * as React from "react";
 import { BackButton } from "../../components/BackButton/intdex";
 import { Button } from "../../components/Button";
+import { ImageSlider } from "../../components/ImageSlider";
 import * as S from "./styles";
 
 interface CarDetailsProps {
@@ -21,7 +22,9 @@ export function CarDetails(props: CarDetailsProps) {
       <S.Header>
         <BackButton />
       </S.Header>
-      <S.CarImages></S.CarImages>
+      <S.CarImages>
+        <ImageSlider imagesUrl={car.thumbnail} />
+      </S.CarImages>
 
       <S.Details>
         <S.Description>
