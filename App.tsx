@@ -1,4 +1,5 @@
-import React, { useCallback } from "react";
+import React from "react";
+import "react-native-gesture-handler";
 import {
   useFonts,
   Inter_400Regular,
@@ -14,7 +15,7 @@ import * as SplashScreen from "expo-splash-screen";
 import theme from "./src/styles/theme";
 
 import { ThemeProvider } from "styled-components";
-import { Confirmation } from "./src/screens/Confirmation";
+import { Routes } from "./src/routes";
 
 export default function App() {
   const [loadedFont] = useFonts({
@@ -32,7 +33,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Confirmation />
+      <Routes />
     </ThemeProvider>
   );
 }

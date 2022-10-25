@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StatusBar } from "react-native";
 import { useTheme } from "styled-components";
@@ -10,6 +11,12 @@ import { Calendar } from "../../components/Calendar";
 import * as S from "./styles";
 
 export function TimePicker() {
+  const navigation = useNavigation();
+
+  function handleTimePickerDetails() {
+    navigation.navigate("TimePickerDetails");
+  }
+
   const theme = useTheme();
   return (
     <S.Container>
@@ -47,7 +54,7 @@ export function TimePicker() {
       </S.Content>
 
       <S.Footer>
-        <Button title="Confirmar" />
+        <Button title="Confirmar" onPress={handleTimePickerDetails} />
       </S.Footer>
     </S.Container>
   );

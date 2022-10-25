@@ -7,9 +7,15 @@ import DoneSvg from "../../assets/done.svg";
 import { ConfirmButton } from "../../components/ConfirmationButton";
 
 import * as S from "./styles";
+import { useNavigation } from "@react-navigation/native";
 
 export function Confirmation() {
+  const navigation = useNavigation();
   const { width } = useWindowDimensions();
+
+  const handleConfirm = () => {
+    navigation.navigate("Home");
+  };
 
   return (
     <S.Container>
@@ -32,7 +38,7 @@ export function Confirmation() {
       </S.Content>
 
       <S.Footer>
-        <ConfirmButton title="OK" onPress={() => {}} />
+        <ConfirmButton title="OK" onPress={handleConfirm} />
       </S.Footer>
     </S.Container>
   );

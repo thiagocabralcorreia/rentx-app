@@ -13,12 +13,19 @@ import { ImageSlider } from "../../components/ImageSlider";
 
 import * as S from "./styles";
 import { Accessory } from "../../components/Acessory";
+import { useNavigation } from "@react-navigation/native";
 
 interface CarDetailsProps {
   color: string;
 }
 
 export function CarDetails(props: CarDetailsProps) {
+  const navigation = useNavigation();
+
+  function handleTimePicker() {
+    navigation.navigate("TimePicker");
+  }
+
   const car = {
     brand: "Audi",
     name: "RS 5 Coupé",
@@ -75,8 +82,10 @@ export function CarDetails(props: CarDetailsProps) {
       </S.Content>
 
       <S.Footer>
-        <Button title="Escolher período do aluguel" />
-
+        <Button
+          title="Escolher período do aluguel"
+          onPress={handleTimePicker}
+        />
         <S.OfflineInfo>
           Conecte-se a internet para ver mais detalhes e agendar seu carro.
         </S.OfflineInfo>

@@ -17,6 +17,7 @@ import PeopleIcon from "../../assets/people.svg";
 
 import * as S from "./styles";
 import { Accessory } from "../../components/Acessory";
+import { useNavigation } from "@react-navigation/native";
 
 interface RentalPeriod {
   start: string;
@@ -24,6 +25,12 @@ interface RentalPeriod {
 }
 
 export function TimePickerDetails() {
+  const navigation = useNavigation();
+
+  function handleConfirmation() {
+    navigation.navigate("Confirmation");
+  }
+
   const theme = useTheme();
 
   return (
@@ -92,7 +99,11 @@ export function TimePickerDetails() {
       </S.Content>
 
       <S.Footer>
-        <Button title="Alugar agora" color={theme.colors.success} />
+        <Button
+          title="Alugar agora"
+          color={theme.colors.success}
+          onPress={handleConfirmation}
+        />
       </S.Footer>
     </S.Container>
   );
