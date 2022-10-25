@@ -13,8 +13,8 @@ import {
 import * as SplashScreen from "expo-splash-screen";
 import theme from "./src/styles/theme";
 
-import { TimePickerDetails } from "./src/screens/TimePickerDetails";
 import { ThemeProvider } from "styled-components";
+import { Confirmation } from "./src/screens/Confirmation";
 
 export default function App() {
   const [loadedFont] = useFonts({
@@ -32,7 +32,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <TimePickerDetails />
+      <Confirmation />
     </ThemeProvider>
   );
 }
