@@ -7,7 +7,7 @@ import GasolineIcon from "../../assets/gasoline.svg";
 import ExchangeIcon from "../../assets/exchange.svg";
 import PeopleIcon from "../../assets/people.svg";
 
-import { BackButton } from "../../components/BackButton/intdex";
+import { BackButton } from "../../components/BackButton";
 import { Button } from "../../components/Button";
 import { ImageSlider } from "../../components/ImageSlider";
 
