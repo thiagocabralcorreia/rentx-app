@@ -13,7 +13,7 @@ import {
 import * as SplashScreen from "expo-splash-screen";
 import theme from "./src/styles/theme";
 
-import { TimePicker } from "./src/screens/TimePicker";
+import { TimePickerDetails } from "./src/screens/TimePickerDetails";
 import { ThemeProvider } from "styled-components";
 
 export default function App() {
@@ -32,7 +32,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <TimePicker />
+      <TimePickerDetails />
     </ThemeProvider>
   );
 }

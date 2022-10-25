@@ -29,7 +29,7 @@ interface DayProps {
 }
 
 interface CalendarProps {
-  markedDates: MarkedDateProps;
+  markedDates?: MarkedDateProps;
 }
 
 function Calendar({ markedDates }: CalendarProps) {
