@@ -1,17 +1,11 @@
 import React from "react";
 import { RectButtonProps } from "react-native-gesture-handler";
+import { CarDTO } from "../../dtos/CarDTO";
 
 import * as S from "./styles";
 
-export interface IModelCar {
-  brand: string;
-  name: string;
-  period: string;
-  price: number;
-  thumbnail: string;
-}
 export interface CarProps extends RectButtonProps {
-  data: IModelCar;
+  data: CarDTO;
 }
 
 export function Card({ data, ...rest }: CarProps) {
@@ -23,8 +17,8 @@ export function Card({ data, ...rest }: CarProps) {
 
         <S.About>
           <S.Rent>
-            <S.Period>{data.period}</S.Period>
-            <S.Price>R$ {data.price}</S.Price>
+            <S.Period>{data.rent.period}</S.Period>
+            <S.Price>R$ {data.rent.price}</S.Price>
           </S.Rent>
 
           <S.Type></S.Type>
