@@ -27,6 +27,10 @@ interface RentalPeriod {
 export function TimePickerDetails() {
   const navigation = useNavigation();
 
+  function handleBack() {
+    navigation.goBack();
+  }
+
   function handleConfirmation() {
     navigation.navigate("Confirmation");
   }
@@ -36,7 +40,7 @@ export function TimePickerDetails() {
   return (
     <S.Container>
       <S.Header>
-        <BackButton onPress={() => {}} />
+        <BackButton onPress={handleBack} />
       </S.Header>
 
       <S.CarImages>

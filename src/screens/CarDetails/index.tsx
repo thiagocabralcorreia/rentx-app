@@ -13,31 +13,34 @@ import { ImageSlider } from "../../components/ImageSlider";
 
 import * as S from "./styles";
 import { Accessory } from "../../components/Acessory";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { CarDTO } from "../../dtos/CarDTO";
 
 interface CarDetailsProps {
   color: string;
 }
 
+interface IParams {
+  car: CarDTO;
+}
+
 export function CarDetails(props: CarDetailsProps) {
   const navigation = useNavigation();
+  const route = useRoute();
+  const { car } = route.params as IParams;
+
+  function handleBack() {
+    navigation.goBack();
+  }
 
   function handleTimePicker() {
     navigation.navigate("TimePicker");
   }
 
-  const car = {
-    brand: "Audi",
-    name: "RS 5 Coupé",
-    period: "AO DIA",
-    price: 120,
-    thumbnail: "https://freepngimg.com/thumb/audi/35227-5-audi-rs5-red.png",
-  };
-
   return (
     <S.Container>
       <S.Header>
-        <BackButton />
+        <BackButton onPress={handleBack} />
       </S.Header>
       <S.CarImages>
         <ImageSlider imagesUrl={car.thumbnail} />
@@ -51,8 +54,8 @@ export function CarDetails(props: CarDetailsProps) {
           </S.Description>
 
           <S.Rent>
-            <S.Period>{car.period}</S.Period>
-            <S.Price>R$ {car.price}</S.Price>
+            <S.Period>{car.rent.period}</S.Period>
+            <S.Price>R$ {car.rent.price}</S.Price>
           </S.Rent>
         </S.Details>
 
@@ -65,20 +68,7 @@ export function CarDetails(props: CarDetailsProps) {
           <Accessory name="2 Pessoas" icon={PeopleIcon} />
         </S.Accessories>
 
-        <S.About>
-          Este é um automóvel desportivo. Este é um automóvel desportivo. Este é
-          um automóvel desportivo. Este é um automóvel desportivo. Este é um
-          automóvel desportivo. Este é um automóvel desportivo. Este é um
-          automóvel desportivo. Este é um automóvel desportivo. Este é um
-          automóvel desportivo.
-        </S.About>
-        <S.About>
-          Este é um automóvel desportivo. Este é um automóvel desportivo. Este é
-          um automóvel desportivo. Este é um automóvel desportivo. Este é um
-          automóvel desportivo. Este é um automóvel desportivo. Este é um
-          automóvel desportivo. Este é um automóvel desportivo. Este é um
-          automóvel desportivo.
-        </S.About>
+        <S.About>{car.about}</S.About>
       </S.Content>
 
       <S.Footer>

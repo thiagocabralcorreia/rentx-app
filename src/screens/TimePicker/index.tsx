@@ -13,6 +13,10 @@ import * as S from "./styles";
 export function TimePicker() {
   const navigation = useNavigation();
 
+  function handleBack() {
+    navigation.goBack();
+  }
+
   function handleTimePickerDetails() {
     navigation.navigate("TimePickerDetails");
   }
@@ -26,7 +30,7 @@ export function TimePicker() {
           translucent
           backgroundColor="transparent"
         />
-        <BackButton color={theme.colors.shape} />
+        <BackButton color={theme.colors.shape} onPress={handleBack} />
 
         <S.Title>
           Escolha uma {"\n"}
