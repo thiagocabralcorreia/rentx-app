@@ -14,7 +14,7 @@ interface CarDetailsProps {
   color: string;
 }
 
-interface IParams {
+export interface IParams {
   car: CarDTO;
 }
 
@@ -28,7 +28,7 @@ export function CarDetails(props: CarDetailsProps) {
   }
 
   function handleTimePicker() {
-    navigation.navigate("TimePicker");
+    navigation.navigate("TimePicker", { car });
   }
 
   return (
