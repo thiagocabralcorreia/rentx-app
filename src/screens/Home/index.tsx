@@ -1,4 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { StatusBar } from "react-native";
@@ -12,9 +13,23 @@ import { api } from "../../services/api";
 
 import * as S from "./styles";
 
-interface HomeProps {}
+export type RootStackParamList = {
+  SignIn: {} | undefined;
+  SignUpFirstStep: {} | undefined;
+  SignUpSecondStep: {} | undefined;
+  Confirmation: {} | undefined;
+  Splash: undefined;
+  Home: {} | undefined;
+  CarDetails: {} | undefined;
+  TimePicker: {} | undefined;
+  TimePickerDetails: {} | undefined;
+  MyCars: undefined;
+  Profile: undefined;
+};
 
-export const Home = (props: HomeProps) => {
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
+
+export const Home = () => {
   const [cars, setCars] = useState<CarDTO>([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigation = useNavigation();
