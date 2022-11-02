@@ -6,6 +6,7 @@ import { CarDetails } from "../screens/CarDetails";
 import { TimePicker } from "../screens/TimePicker";
 import { TimePickerDetails } from "../screens/TimePickerDetails";
 import { Confirmation } from "../screens/Confirmation";
+import { MyCars } from "../screens/MyCars";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -21,6 +22,7 @@ export function StackRoutes() {
       <Screen name="TimePicker" component={TimePicker} />
       <Screen name="TimePickerDetails" component={TimePickerDetails} />
       <Screen name="Confirmation" component={Confirmation} />
+      <Screen name="MyCars" component={MyCars} />
     </Navigator>
   );
 }

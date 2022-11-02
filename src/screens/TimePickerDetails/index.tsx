@@ -68,7 +68,14 @@ export function TimePickerDetails({ navigation, route }: NextScreenProps) {
       ...dates,
     ];
 
-    api
+    await api.post("schedules_byuser", {
+      user_id: 1007,
+      car,
+      startDate: rentalPeriod.start,
+      endDate: rentalPeriod.end,
+    });
+
+    await api
       .put(`/schedules_bycars/${car.id}`, { id: car.id, unavailable_dates })
       .then(() => navigation.navigate("Confirmation"))
       .catch(() => Alert.alert("Não foi possível confirmar o agendamento."));
