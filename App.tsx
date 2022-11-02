@@ -29,7 +29,9 @@ export default function App() {
   if (loadedFont) {
     SplashScreen.hideAsync();
   }
-  if (!loadedFont) return null;
+  if (!loadedFont) {
+    SplashScreen.preventAutoHideAsync();
+  }
 
   return (
     <ThemeProvider theme={theme}>
