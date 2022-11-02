@@ -1,43 +1,40 @@
 import * as React from "react";
 
-import SpeedIcon from "../../assets/speed.svg";
-import AccelerationIcon from "../../assets/acceleration.svg";
-import ForceIcon from "../../assets/force.svg";
-import GasolineIcon from "../../assets/gasoline.svg";
-import ExchangeIcon from "../../assets/exchange.svg";
-import PeopleIcon from "../../assets/people.svg";
-
 import { BackButton } from "../../components/BackButton";
 import { Button } from "../../components/Button";
 import { ImageSlider } from "../../components/ImageSlider";
 
 import * as S from "./styles";
 import { Accessory } from "../../components/Acessory";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { CarDTO } from "../../dtos/CarDTO";
+import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
 
 interface CarDetailsProps {
   color: string;
 }
 
+export interface IParams {
+  car: CarDTO;
+}
+
 export function CarDetails(props: CarDetailsProps) {
   const navigation = useNavigation();
+  const route = useRoute();
+  const { car } = route.params as IParams;
 
-  function handleTimePicker() {
-    navigation.navigate("TimePicker");
+  function handleBack() {
+    navigation.goBack();
   }
 
-  const car = {
-    brand: "Audi",
-    name: "RS 5 Coupé",
-    period: "AO DIA",
-    price: 120,
-    thumbnail: "https://freepngimg.com/thumb/audi/35227-5-audi-rs5-red.png",
-  };
+  function handleTimePicker() {
+    navigation.navigate("TimePicker", { car });
+  }
 
   return (
     <S.Container>
       <S.Header>
-        <BackButton />
+        <BackButton onPress={handleBack} />
       </S.Header>
       <S.CarImages>
         <ImageSlider imagesUrl={car.thumbnail} />
@@ -51,34 +48,22 @@ export function CarDetails(props: CarDetailsProps) {
           </S.Description>
 
           <S.Rent>
-            <S.Period>{car.period}</S.Period>
-            <S.Price>R$ {car.price}</S.Price>
+            <S.Period>{car.rent.period}</S.Period>
+            <S.Price>R$ {car.rent.price}</S.Price>
           </S.Rent>
         </S.Details>
 
         <S.Accessories>
-          <Accessory name="300km/h" icon={SpeedIcon} />
-          <Accessory name="3.2s" icon={AccelerationIcon} />
-          <Accessory name="800 HP" icon={ForceIcon} />
-          <Accessory name="Gasolina" icon={GasolineIcon} />
-          <Accessory name="Auto" icon={ExchangeIcon} />
-          <Accessory name="2 Pessoas" icon={PeopleIcon} />
+          {car.accessories.map((accessory) => (
+            <Accessory
+              key={accessory.type}
+              name={accessory.name}
+              icon={getAccessoryIcon(accessory.type)}
+            />
+          ))}
         </S.Accessories>
 
-        <S.About>
-          Este é um automóvel desportivo. Este é um automóvel desportivo. Este é
-          um automóvel desportivo. Este é um automóvel desportivo. Este é um
-          automóvel desportivo. Este é um automóvel desportivo. Este é um
-          automóvel desportivo. Este é um automóvel desportivo. Este é um
-          automóvel desportivo.
-        </S.About>
-        <S.About>
-          Este é um automóvel desportivo. Este é um automóvel desportivo. Este é
-          um automóvel desportivo. Este é um automóvel desportivo. Este é um
-          automóvel desportivo. Este é um automóvel desportivo. Este é um
-          automóvel desportivo. Este é um automóvel desportivo. Este é um
-          automóvel desportivo.
-        </S.About>
+        <S.About>{car.about}</S.About>
       </S.Content>
 
       <S.Footer>
