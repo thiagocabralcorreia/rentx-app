@@ -23,9 +23,9 @@ import { Alert } from "react-native";
 
 type NextScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
-  "TimePickerDetails"
+  "SchedulingDetails"
 >;
-type NextScreenRouteProp = RouteProp<RootStackParamList, "TimePickerDetails">;
+type NextScreenRouteProp = RouteProp<RootStackParamList, "SchedulingDetails">;
 
 type NextScreenProps = {
   navigation: NextScreenNavigationProp;
@@ -42,15 +42,11 @@ interface RentalPeriod {
   end: string;
 }
 
-interface UnavailableDatesProps {
-  unavailable_dates: string[];
-}
-
-export function TimePickerDetails({ navigation, route }: NextScreenProps) {
+export function SchedulingDetails({ navigation, route }: NextScreenProps) {
+  const [loading, setLoading] = useState<boolean>(false);
   const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>(
     {} as RentalPeriod
   );
-  const [updatedCar, setUpdatedCar] = useState<CarDTO>({} as CarDTO);
 
   const { car, dates } = route.params as Params;
   const totalRent = Number(dates.length * car.rent.price);
@@ -61,6 +57,8 @@ export function TimePickerDetails({ navigation, route }: NextScreenProps) {
   }
 
   async function handleConfirmation() {
+    setLoading(true);
+
     const schedulesByCars = await api.get(`/schedules_bycars/${car.id}`);
 
     const unavailable_dates = [
@@ -78,7 +76,10 @@ export function TimePickerDetails({ navigation, route }: NextScreenProps) {
     await api
       .put(`/schedules_bycars/${car.id}`, { id: car.id, unavailable_dates })
       .then(() => navigation.navigate("Confirmation"))
-      .catch(() => Alert.alert("Não foi possível confirmar o agendamento."));
+      .catch(() => {
+        setLoading(false);
+        Alert.alert("Não foi possível confirmar o agendamento.");
+      });
   }
 
   useEffect(() => {
@@ -114,17 +115,15 @@ export function TimePickerDetails({ navigation, route }: NextScreenProps) {
           </S.Rent>
         </S.Details>
 
-        {updatedCar.accessories && (
-          <S.Accessories>
-            {updatedCar.accessories.map((accessory) => (
-              <Accessory
-                key={accessory.type}
-                name={accessory.name}
-                icon={getAccessoryIcon(accessory.type)}
-              />
-            ))}
-          </S.Accessories>
-        )}
+        <S.Accessories>
+          {car.accessories.map((accessory) => (
+            <Accessory
+              key={accessory.type}
+              name={accessory.name}
+              icon={getAccessoryIcon(accessory.type)}
+            />
+          ))}
+        </S.Accessories>
 
         <S.RentalPeriod>
           <S.CalendarIcon>
@@ -166,6 +165,8 @@ export function TimePickerDetails({ navigation, route }: NextScreenProps) {
           title="Alugar agora"
           color={theme.colors.success}
           onPress={handleConfirmation}
+          enabled={!loading}
+          loading={loading}
         />
       </S.Footer>
     </S.Container>

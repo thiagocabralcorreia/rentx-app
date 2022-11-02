@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Home } from "../screens/Home";
 import { CarDetails } from "../screens/CarDetails";
 import { TimePicker } from "../screens/TimePicker";
-import { TimePickerDetails } from "../screens/TimePickerDetails";
+import { SchedulingDetails } from "../screens/SchedulingDetails";
 import { Confirmation } from "../screens/Confirmation";
 import { MyCars } from "../screens/MyCars";
 
@@ -20,7 +20,7 @@ export function StackRoutes() {
       <Screen name="Home" component={Home} />
       <Screen name="CarDetails" component={CarDetails} />
       <Screen name="TimePicker" component={TimePicker} />
-      <Screen name="TimePickerDetails" component={TimePickerDetails} />
+      <Screen name="SchedulingDetails" component={SchedulingDetails} />
       <Screen name="Confirmation" component={Confirmation} />
       <Screen name="MyCars" component={MyCars} />
     </Navigator>

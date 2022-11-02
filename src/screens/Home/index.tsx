@@ -24,7 +24,7 @@ export type RootStackParamList = {
   Home: {} | undefined;
   CarDetails: {} | undefined;
   TimePicker: {} | undefined;
-  TimePickerDetails: {} | undefined;
+  SchedulingDetails: {} | undefined;
   MyCars: undefined;
   Profile: undefined;
 };

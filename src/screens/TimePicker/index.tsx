@@ -42,8 +42,8 @@ export function TimePicker() {
     navigation.goBack();
   }
 
-  function handleTimePickerDetails() {
-    navigation.navigate("TimePickerDetails", {
+  function handleSchedulingDetails() {
+    navigation.navigate("SchedulingDetails", {
       car,
       dates: Object.keys(markedDates),
     });
@@ -94,7 +94,7 @@ export function TimePicker() {
         <S.RentalPeriod>
           <S.DateInfo>
             <S.DateTitle>DE</S.DateTitle>
-            <S.DateValue selected={false}>
+            <S.DateValue selected={!!rentalPeriod.startFormatted}>
               {rentalPeriod.startFormatted}
             </S.DateValue>
           </S.DateInfo>
@@ -103,7 +103,7 @@ export function TimePicker() {
 
           <S.DateInfo>
             <S.DateTitle>ATÉ</S.DateTitle>
-            <S.DateValue selected={false}>
+            <S.DateValue selected={!!rentalPeriod.endFormatted}>
               {rentalPeriod.endFormatted}
             </S.DateValue>
           </S.DateInfo>
@@ -115,7 +115,11 @@ export function TimePicker() {
       </S.Content>
 
       <S.Footer>
-        <Button title="Confirmar" onPress={handleTimePickerDetails} />
+        <Button
+          title="Confirmar"
+          enabled={!!rentalPeriod.startFormatted}
+          onPress={handleSchedulingDetails}
+        />
       </S.Footer>
     </S.Container>
   );
