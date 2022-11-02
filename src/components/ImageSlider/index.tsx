@@ -1,22 +1,45 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import { FlatList, ViewToken } from "react-native";
 import { Bullet } from "../Bullet";
 import * as S from "./styles";
 
 interface ImageSliderProps {
-  imagesUrl: string;
+  imagesUrl: string[];
+}
+
+interface ChangeImageProps {
+  viewableItems: ViewToken[];
+  changed: ViewToken[];
 }
 
 export function ImageSlider({ imagesUrl }: ImageSliderProps) {
+  const [imageIndex, setImageIndex] = useState(0);
+
+  const indexChanged = useRef((info: ChangeImageProps) => {
+    const index = info.viewableItems[0].index!;
+    setImageIndex(index);
+  });
+
   return (
     <S.Container>
       <S.ImageIndexes>
-        <Bullet active={true} />
-        <Bullet active={false} />
-        <Bullet active={false} />
+        {imagesUrl?.map((_, index) => (
+          <Bullet key={String(index)} active={index === imageIndex} />
+        ))}
       </S.ImageIndexes>
-      <S.CarImageWrapper>
-        <S.CarImage source={{ uri: imagesUrl }} resizeMode="contain" />
-      </S.CarImageWrapper>
+
+      <FlatList
+        data={imagesUrl}
+        keyExtractor={(key) => key}
+        renderItem={({ item }) => (
+          <S.CarImageWrapper>
+            <S.CarImage source={{ uri: item }} resizeMode="contain" />
+          </S.CarImageWrapper>
+        )}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        onViewableItemsChanged={indexChanged.current}
+      />
     </S.Container>
   );
 }

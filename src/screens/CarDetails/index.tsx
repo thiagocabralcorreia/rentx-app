@@ -37,7 +37,7 @@ export function CarDetails(props: CarDetailsProps) {
         <BackButton onPress={handleBack} />
       </S.Header>
       <S.CarImages>
-        <ImageSlider imagesUrl={car.thumbnail} />
+        <ImageSlider imagesUrl={car.photos} />
       </S.CarImages>
 
       <S.Content>

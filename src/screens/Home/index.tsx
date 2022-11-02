@@ -68,7 +68,7 @@ export const Home = () => {
       />
       <S.Header>
         <Logo width={RFValue(114)} height={RFValue(11)} />
-        <S.TotalCars>Total de 12 carros</S.TotalCars>
+        <S.TotalCars>{`Total de ${cars.length} carros`}</S.TotalCars>
       </S.Header>
       {isLoading ? (
         <Loader />
