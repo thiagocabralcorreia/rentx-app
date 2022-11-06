@@ -99,7 +99,7 @@ export function SchedulingDetails({ navigation, route }: NextScreenProps) {
       </S.Header>
 
       <S.CarImages>
-        <ImageSlider imagesUrl={car.thumbnail} />
+        <ImageSlider imagesUrl={car.photos} />
       </S.CarImages>
 
       <S.Content>

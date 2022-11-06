@@ -81,7 +81,7 @@ export function CarDetails(props: CarDetailsProps) {
         ]}
       >
         <S.Header>
-          <BackButton onPress={handleBack} />
+          <BackButton onPress={() => handleBack()} />
         </S.Header>
 
         <Animated.View style={sliderCarsStyleAnimation}>
@@ -130,9 +130,6 @@ export function CarDetails(props: CarDetailsProps) {
           title="Escolher período do aluguel"
           onPress={handleTimePicker}
         />
-        <S.OfflineInfo>
-          Conecte-se a internet para ver mais detalhes e agendar seu carro.
-        </S.OfflineInfo>
       </S.Footer>
     </S.Container>
   );

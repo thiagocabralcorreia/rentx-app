@@ -3,8 +3,12 @@ import { FlatList, ViewToken } from "react-native";
 import { Bullet } from "../Bullet";
 import * as S from "./styles";
 
+interface ImageUrlSchema {
+  id: string;
+  photo: string;
+}
 interface ImageSliderProps {
-  imagesUrl: string[];
+  imagesUrl: ImageUrlSchema[];
 }
 
 interface ChangeImageProps {
@@ -22,11 +26,13 @@ export function ImageSlider({ imagesUrl }: ImageSliderProps) {
 
   return (
     <S.Container>
-      <S.ImageIndexes>
-        {imagesUrl?.map((_, index) => (
-          <Bullet key={String(index)} active={index === imageIndex} />
-        ))}
-      </S.ImageIndexes>
+      {
+        <S.ImageIndexes>
+          {imagesUrl.map((_, index) => (
+            <Bullet key={String(index)} active={index === imageIndex} />
+          ))}
+        </S.ImageIndexes>
+      }
 
       <FlatList
         data={imagesUrl}

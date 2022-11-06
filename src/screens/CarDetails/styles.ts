@@ -16,7 +16,7 @@ export const Header = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
+  z-index: 50;
   position: absolute;
   margin-top: ${getStatusBarHeight() + 18}px;
   margin-left: 24px;
@@ -90,15 +90,6 @@ export const About = styled.Text`
     margin-top: 23px;
 
     line-height: ${RFValue(23)}px;
-  `}
-`;
-
-export const OfflineInfo = styled.Text`
-  ${({ theme }) => css`
-    color: ${theme.colors.main};
-    font-family: ${theme.fonts.secondary_500};
-    font-size: ${RFValue(10)}px;
-    text-align: center;
   `}
 `;
 
