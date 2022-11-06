@@ -1,5 +1,4 @@
 import React from "react";
-import "react-native-gesture-handler";
 import {
   useFonts,
   Inter_400Regular,
@@ -29,7 +28,9 @@ export default function App() {
   if (loadedFont) {
     SplashScreen.hideAsync();
   }
-  if (!loadedFont) return null;
+  if (!loadedFont) {
+    SplashScreen.preventAutoHideAsync();
+  }
 
   return (
     <ThemeProvider theme={theme}>

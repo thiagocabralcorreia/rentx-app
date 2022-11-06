@@ -9,7 +9,7 @@ import { BackButton } from "../../components/BackButton";
 import { Card } from "../../components/Card";
 
 import * as S from "./styles";
-import { Loader } from "../../components/Loader";
+import { LoadingAnimation } from "../../components/LoadingAnimation";
 
 interface DataProps {
   id: string;
@@ -63,7 +63,7 @@ export function MyCars() {
         <S.SubTitle>Conforto, segurança e praticidade.</S.SubTitle>
       </S.Header>
       {loading ? (
-        <Loader />
+        <LoadingAnimation />
       ) : (
         <S.Content>
           <S.Appointments>
