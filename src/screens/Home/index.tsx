@@ -14,7 +14,7 @@ import Animated, {
 
 import Logo from "../../assets/logo.svg";
 import { Card } from "../../components/Card";
-import { Loader } from "../../components/Loader";
+import { LoadingAnimation } from "../../components/LoadingAnimation";
 import { CarDTO } from "../../dtos/CarDTO";
 import { api } from "../../services/api";
 
@@ -40,9 +40,9 @@ export type RootStackParamList = {
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
 
 export const Home = () => {
-  const [cars, setCars] = useState<CarDTO>([]);
+  const [cars, setCars] = useState<CarDTO[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const navigation = useNavigation();
+  const navigation = useNavigation<HomeScreenNavigationProp>();
   const theme = useTheme();
 
   const positionY = useSharedValue(0);
@@ -114,7 +114,7 @@ export const Home = () => {
         )}
       </S.Header>
       {isLoading ? (
-        <Loader />
+        <LoadingAnimation />
       ) : (
         <S.CarList
           data={cars}
