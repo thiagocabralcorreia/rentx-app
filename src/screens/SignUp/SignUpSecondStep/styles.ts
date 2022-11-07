@@ -3,20 +3,28 @@ import { RFValue } from "react-native-responsive-fontsize";
 import styled, { css } from "styled-components/native";
 
 export const Container = styled.View`
+  padding: 0 24px;
   ${({ theme }) => css`
-    padding: 0 24px;
-    justify-content: flex-end;
+    background-color: ${theme.colors.background_primary};
   `}
 `;
 
 export const Header = styled.View`
-  ${({ theme }) => css`
-    width: 100%;
-    margin-top: ${getStatusBarHeight() + 115}px;
-  `}
+  width: 100%;
+  margin-top: ${getStatusBarHeight() + 31}px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const Steps = styled.View`
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const Title = styled.Text`
+  margin-top: 60px;
+  margin-bottom: 16px;
   ${({ theme }) => css`
     font-size: ${RFValue(38)}px;
     font-family: ${theme.fonts.secondary_600};
@@ -30,15 +38,20 @@ export const Subtitle = styled.Text`
     font-family: ${theme.fonts.primary_400};
     color: ${theme.colors.text};
     line-height: 24px;
-    margin-top: 16px;
   `}
 `;
 
 export const Form = styled.View`
-  ${({ theme }) => css`
-    width: 100%;
-    margin: 64px 0;
-  `}
+  width: 100%;
+  margin-top: 64px;
+  margin-bottom: 16px;
 `;
 
-export const Footer = styled.View``;
+export const FormTitle = styled.Text`
+  ${({ theme }) => css`
+    font-size: ${RFValue(20)}px;
+    font-family: ${theme.fonts.secondary_600};
+    color: ${theme.colors.title};
+    margin-bottom: 24px;
+  `}
+`;
