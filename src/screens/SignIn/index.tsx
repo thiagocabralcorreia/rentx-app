@@ -1,6 +1,13 @@
 import React, { useState } from "react";
-import { KeyboardAvoidingView, StatusBar } from "react-native";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import {
+  Alert,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  StatusBar,
+  TouchableWithoutFeedback,
+} from "react-native";
+import * as Yup from "yup";
 import { useTheme } from "styled-components";
 
 import { Button } from "../../components/Button";
@@ -15,9 +22,34 @@ export function SignIn() {
 
   const theme = useTheme();
 
+  async function handleSignIn() {
+    try {
+      const schema = Yup.object().shape({
+        email: Yup.string()
+          .required("E-mail obrigatório")
+          .email("Digite um e-mail válido"),
+        password: Yup.string().required("A senha é obrigatória"),
+      });
+      await schema.validate({ email, password });
+      Alert.alert("Tudo certo");
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        Alert.alert("Opa", error.message);
+      } else {
+        Alert.alert(
+          "Erro na autenticação",
+          "Ocorreu um erro ao fazer login, verifique as credenciais"
+        );
+      }
+    }
+  }
+
   return (
-    <KeyboardAvoidingView>
-      <TouchableWithoutFeedback>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : undefined}
+      style={{ flex: 1, backgroundColor: theme.colors.shape }}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <S.Container>
           <StatusBar
             barStyle="dark-content"
@@ -52,10 +84,15 @@ export function SignIn() {
           </S.Form>
 
           <S.Footer>
-            <Button title="Login" onPress={() => {}} enabled loading={false} />
+            <Button
+              title="Login"
+              onPress={handleSignIn}
+              enabled
+              loading={false}
+            />
             <Button
               title="Criar conta gratuita"
-              color={theme.colors.background_secondary}
+              color={theme.colors.background_primary}
               light
               onPress={() => {}}
               enabled

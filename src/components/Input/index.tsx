@@ -27,7 +27,7 @@ export function Input({ iconName, value, ...rest }: Props) {
 
   return (
     <S.Container>
-      <S.IconContainer isFocused={isFocused}>
+      <S.IconContainer>
         <Feather
           name={iconName}
           size={22}

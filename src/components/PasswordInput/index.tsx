@@ -33,10 +33,11 @@ export function PasswordInput({ iconName, value, ...rest }: Props) {
 
   return (
     <S.Container>
-      <S.IconContainer isFocused={isFocused}>
+      <S.IconContainer>
         <Feather
           name={iconName}
           size={22}
+          isFocused={isFocused}
           color={
             isFocused || isFilled ? theme.colors.main : theme.colors.text_detail
           }

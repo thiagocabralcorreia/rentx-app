@@ -2,7 +2,7 @@ import styled, { css } from "styled-components/native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { TextInput } from "react-native";
 
-interface Props {
+interface PasswordProps {
   isFocused: boolean;
 }
 
@@ -11,7 +11,7 @@ export const Container = styled.View`
   margin-bottom: 8px;
 `;
 
-export const IconContainer = styled.View<Props>`
+export const IconContainer = styled.View<PasswordProps>`
   height: 56px;
   width: 55px;
   justify-content: center;
@@ -28,7 +28,7 @@ export const IconContainer = styled.View<Props>`
     `}
 `;
 
-export const InputText = styled(TextInput)<Props>`
+export const InputText = styled(TextInput)<PasswordProps>`
   flex: 1;
   padding: 0 23px;
   ${({ theme }) => css`
