@@ -6,14 +6,39 @@ import DoneSvg from "../../assets/done.svg";
 
 import { ConfirmButton } from "../../components/ConfirmationButton";
 
+import { RouteProp } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../Home";
 import * as S from "./styles";
-import { useNavigation } from "@react-navigation/native";
 
-export function Confirmation() {
-  const navigation = useNavigation();
+type NextScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "Confirmation"
+>;
+
+type NextScreenRouteProp = RouteProp<RootStackParamList, "Confirmation">;
+
+type NextScreenProps = {
+  navigation: NextScreenNavigationProp;
+  route: NextScreenRouteProp;
+};
+
+interface Params {
+  title: string;
+  message: string;
+  nextScreenRoute: string;
+}
+
+export function Confirmation({ navigation, route }: NextScreenProps) {
   const { width } = useWindowDimensions();
+  const { title, message, nextScreenRoute } = route.params as Params;
 
   const handleConfirm = () => {
+    if (!!nextScreenRoute && nextScreenRoute === "SignIn") {
+      navigation.navigate("SignIn");
+      return;
+    }
+
     navigation.navigate("Home");
   };
 
@@ -28,13 +53,9 @@ export function Confirmation() {
 
       <S.Content>
         <DoneSvg width={80} height={80} />
-        <S.Title>Carro alugado</S.Title>
+        <S.Title>{title}</S.Title>
 
-        <S.Message>
-          Agora você só precisa ir {"\n"}
-          até a concessionária da RENTX {"\n"}
-          pegar o seu automóvel.
-        </S.Message>
+        <S.Message>{message}</S.Message>
       </S.Content>
 
       <S.Footer>

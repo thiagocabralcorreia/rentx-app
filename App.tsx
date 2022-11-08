@@ -10,6 +10,7 @@ import {
   Archivo_500Medium,
   Archivo_600SemiBold,
 } from "@expo-google-fonts/archivo";
+
 import * as SplashScreen from "expo-splash-screen";
 import theme from "./src/styles/theme";
 
