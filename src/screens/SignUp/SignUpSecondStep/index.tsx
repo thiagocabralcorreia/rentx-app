@@ -3,6 +3,7 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 import { useTheme } from "styled-components";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -25,25 +26,37 @@ type NextScreenRouteProp = RouteProp<RootStackParamList, "SignUpSecondStep">;
 
 type NextScreenProps = {
   navigation: NextScreenNavigationProp;
+  route: NextScreenRouteProp;
 };
 
-// interface Params {
-//   user: {
-//     name: string;
-//     email: string;
-//     driverLicense: string;
-//   }
-// }
+interface Params {
+  user: {
+    name: string;
+    email: string;
+    driverLicense: string;
+  };
+}
 
-export function SignUpSecondStep({ navigation }: NextScreenProps) {
+export function SignUpSecondStep({ navigation, route }: NextScreenProps) {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const theme = useTheme();
 
-  //const { user } = route.params as Params;
+  const { user } = route.params as Params;
 
   function handleRegister() {
-    navigation.navigate("Confirmation");
+    if (!password || !passwordConfirm) {
+      Alert.alert("Informe a senha e a confirmação");
+    }
+    if (password != passwordConfirm) {
+      Alert.alert("As senhas não são iguais");
+    }
+
+    navigation.navigate("Confirmation", {
+      nextScreenRoute: "SignIn",
+      title: "Conta criada!",
+      message: `Agora é só fazer o login\n e aproveitar.`,
+    });
   }
 
   function handleBack() {
@@ -57,8 +70,8 @@ export function SignUpSecondStep({ navigation }: NextScreenProps) {
           <S.Header>
             <BackButton onPress={handleBack} />
             <S.Steps>
-              <Bullet active />
               <Bullet />
+              <Bullet active />
             </S.Steps>
           </S.Header>
 
@@ -84,7 +97,7 @@ export function SignUpSecondStep({ navigation }: NextScreenProps) {
             />
           </S.Form>
           <Button
-            title="Próximo"
+            title="Cadastrar"
             color={theme.colors.success}
             onPress={handleRegister}
           />

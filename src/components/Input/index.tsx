@@ -40,6 +40,7 @@ export function Input({ iconName, value, ...rest }: Props) {
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
         isFocused={isFocused}
+        autoCapitalize="none"
         {...rest}
       />
     </S.Container>

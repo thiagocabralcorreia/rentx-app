@@ -3,7 +3,9 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
+import * as Yup from "yup";
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../Home";
@@ -31,8 +33,25 @@ export function SignUpFirstStep({ navigation }: NextScreenProps) {
   const [email, setEmail] = useState("");
   const [driverLicense, setDriverLicense] = useState("");
 
-  function handleRegister() {
-    navigation.navigate("SignUpSecondStep");
+  async function handleNextStep() {
+    try {
+      const schema = Yup.object().shape({
+        driverLicense: Yup.string().required("CNH é obrigatória"),
+        email: Yup.string()
+          .email("E-mail inválido")
+          .required("E-mail é obrigatório"),
+        name: Yup.string().required("Nome é obrigatório"),
+      });
+
+      const data = { name, email, driverLicense };
+      await schema.validate(data);
+
+      navigation.navigate("SignUpSecondStep", { user: data });
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        return Alert.alert("Opa", error.message);
+      }
+    }
   }
 
   function handleBack() {
@@ -82,7 +101,7 @@ export function SignUpFirstStep({ navigation }: NextScreenProps) {
               value={driverLicense}
             />
           </S.Form>
-          <Button title="Próximo" onPress={handleRegister} />
+          <Button title="Próximo" onPress={handleNextStep} />
         </S.Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

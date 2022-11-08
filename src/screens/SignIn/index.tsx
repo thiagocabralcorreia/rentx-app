@@ -20,7 +20,7 @@ import * as S from "./styles";
 
 type NextScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
-  "SignUpFirstStep"
+  "SignIn"
 >;
 
 type NextScreenProps = {
@@ -46,6 +46,7 @@ export function SignIn({ navigation }: NextScreenProps) {
       });
       await schema.validate({ email, password });
       Alert.alert("Tudo certo");
+      navigation.navigate("Home");
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert("Opa", error.message);
