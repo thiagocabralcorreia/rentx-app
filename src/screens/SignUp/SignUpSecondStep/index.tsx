@@ -66,7 +66,6 @@ export function SignUpSecondStep({ navigation, route }: NextScreenProps) {
           title: "Conta criada!",
           message: `Agora é só fazer o login\n e aproveitar.`,
         });
-        console.log({ user });
       })
       .catch(() => {
         Alert.alert("Opa", "Não foi possível cadastrar");
